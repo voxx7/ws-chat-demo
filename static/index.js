@@ -7,7 +7,7 @@
 
 	/* handle login */
 	function connectToChat(id){
-		var socket=io.connect('http://localhost:3000', {
+		socket=io.connect(location.origin, {
 			query: 'userId=' + id
 		});	
 	
@@ -160,7 +160,7 @@
 			$(this).siblings('input').val('');
 			$(this).siblings('ul').append($('<li>').text("me (" + new Date() + "): " + msg));
 		
-			$.get( "/sendMsg", { uid: toID, msg: {from: myUID, content: msg } });
+			socket.emit("chatMsg", { to: toID, from: myUID, content: msg});
 		
 		});
 	});

@@ -118,17 +118,18 @@ io.on('connection', function(socket){
 	);
 	
 	/* send message to specific user id */
-	app.get('/sendMsg', function(req, res){
-		var userID = req.query.uid;
-		var msg = req.query.msg;
+	socket.on('chatMsg', function(msg){
+		var userID = msg.to;
+		var from = msg.from;
+		var content = msg.content;
 		
-		logger.debug("send msg to: " + userID + " , msg: " + msg);
+		logger.debug("send msg from: " + from + " ,to: " + userID + " , msg: " + content);
 		
 		msgCol.insert(
 			{
-				from: msg.from,
+				from: from,
 				to: userID,
-				content: msg.content,
+				content: content,
 				ts: new Date()
 			}
 		);
@@ -136,11 +137,12 @@ io.on('connection', function(socket){
 			//TODO: check if user exist
 			io.to('user' + userID).emit('msg', msg)
 		}
-		
-		
-		//end request
-		res.end();
 	});
+	
+	/* when user disconnects */
+	socket.on('disconnect', function () {
+	
+    });
 });
 /* query message from database */
 app.get('/fetchMsg', function(req, res){
