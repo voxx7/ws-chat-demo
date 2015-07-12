@@ -123,7 +123,7 @@ io.on('connection', function(socket){
 		var from = msg.from;
 		var content = msg.content;
 		
-		logger.debug("send msg from: " + from + " ,to: " + userID + " , msg: " + content);
+		logger.debug("send msg from: " + from + " to: " + userID + " , msg: " + content);
 		
 		msgCol.insert(
 			{
