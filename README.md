@@ -7,6 +7,7 @@ Demo for WebSocket based chat room implementation.
   - Socket.IO 1.3.5
   - MongoJS 1.0.2
   - Winston 1.0.1
+  - Q 1.4.1
 - MongoDB 3.0
 
 ### Frontend Stack
