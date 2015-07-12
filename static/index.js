@@ -21,17 +21,25 @@
 			var users = Object.keys(msg);
 			var listHTML = "";
 			//<li><a class="list-group-item" href="#">User2</a></li>
+			var numUsers = 0;
 			for(var i = 0; i < users.length; i++){
 				var curUID = users[i];
 				var curUserName = msg[curUID];
 				if(curUserName != id){
 					listHTML += '<li userid="' + curUID + '" username="' + curUserName + '"><a class="list-group-item" href="#">' + curUserName + '</a></li>';
+					numUsers++;
 				}else{
 					myUID = curUID;
 				}
 			}
+			
+			if(numUsers == 0){
+				listHTML = '<li>No other user joined</li>';
+			}
 			$('#userList').empty();
 			$('#userList').append(listHTML);
+			
+			
 		});
 		/* handle incoming message */
 		socket.on('msg', function(msg){
