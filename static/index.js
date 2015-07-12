@@ -130,7 +130,9 @@
 			var toID = $(this).attr("userid");
 			var toName = $(this).attr("username");
 			console.log(toID);
-			openChatTab(toID, toName);
+			if(toID){
+				openChatTab(toID, toName);
+			}
 		});
 		
 		/* regiester nav table close and focus action */
