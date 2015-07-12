@@ -12,72 +12,13 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <style>
-		body {
-			padding-top: 50px;
-			overflow: hidden;
-		}
-		#wrapper {
-			min-height: 100%;
-			height: 100%;
-			width: 100%;
-			position: absolute;
-			top: 0px;
-			left: 0;
-			display: inline-block;
-		}
-		#main-wrapper {
-			height: 100%;
-			overflow-y: auto;
-			padding: 50px 0 0px 0;
-		}
-		#main {
-			position: relative;
-			height: 100%;
-			overflow-y: auto;
-			padding: 0 15px;
-		}
-		#sidebar-wrapper {
-			height: 100%;
-			padding: 50px 0 0px 0;
-			position: fixed;
-			border-right: 1px solid gray;
-		}
-		#sidebar {
-			position: relative;
-			height: 100%;
-			overflow-y: auto;
-		}
-		#sidebar .list-group-item {
-				border-radius: 0;
-				border-left: 0;
-				border-right: 0;
-				border-top: 0;
-		}
-		@media (max-width: 992px) {
-			body {
-				padding-top: 0px;
-			}
-		}
-		@media (min-width: 992px) {
-			#main-wrapper {
-				float:right;
-			}
-		}
-		@media (max-width: 992px) {
-			#main-wrapper {
-				padding-top: 0px;
-			}
-		}
-		@media (max-width: 992px) {
-			#sidebar-wrapper {
-				position: static;
-				height:auto;
-				max-height: 300px;
-				border-right:0;
-			}
-		}
-    </style>
+  
+  	<!-- local sytlesheet -->
+  	<link rel="stylesheet" href="/static/index.css">
+  	
+  	<!-- local script -->
+  	<script src="/static/index.js"></script>
+  	
   </head>
   <body>
   <div id="header" class="navbar navbar-default navbar-fixed-top">
@@ -86,83 +27,93 @@
             <i class="icon-reorder"></i>
         </button>
         <a class="navbar-brand" href="#">
-            Brand
+            WebSocket Chat Service
         </a>
     </div>
     <nav class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="#">Navbar Item 1</a>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navbar Item 2<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Navbar Item2 - Sub Item 1</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Navbar Item 3</a>
-            </li>
-        </ul>
+   
         <ul class="nav navbar-nav pull-right">
-            <li class="dropdown">
-                <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>Username<i class="icon-sort-down"></i></a>
-                <ul class="dropdown-menu pull-right">
-                    <li><a href="#">Log Out</a></li>
-                </ul>
+			<li>
+                <a href="#myModalNorm" role="button" class="btn" data-toggle="modal" id="loginNavBtn">Log in</a>
             </li>
         </ul>
     </nav>
-</div>
-<div id="wrapper">
+  </div>
+  <div id="wrapper">
   <div id="sidebar-wrapper" class="col-md-1">
             <div id="sidebar">
-                <ul class="nav list-group">
-                    <li>
-                        <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 1</a>
-                    </li>
-                    <li>
-                        <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 2</a>
-                    </li>
-                    <li>
-                        <a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 3</a>
-                    </li>
+                <ul class="nav list-group" id="userList">
+                
                 </ul>
             </div>
         </div>
         <div id="main-wrapper" class="col-md-11 pull-right">
             <div id="main">
             	<!-- Nav tabs -->
+            	
 				  <ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-					<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-					<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-					<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+					
 				  </ul>
-
+				
 				  <!-- Tab panes -->
+			
 				  <div class="tab-content">
-					<div role="tabpanel" class="tab-pane active" id="home">...</div>
-					<div role="tabpanel" class="tab-pane" id="profile">...</div>
-					<div role="tabpanel" class="tab-pane" id="messages">...</div>
-					<div role="tabpanel" class="tab-pane" id="settings">...</div>
+				  
 				  </div>
+			
             </div>
         </div>
-</div>
-  
-    
-    
-    <script>
-      var socket = io();
-      $('form').submit(function(){
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
-        return false;
-      });
-      socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
-      });
-    </script>
+  </div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+		 aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" 
+					   data-dismiss="modal">
+						   <span aria-hidden="true">&times;</span>
+						   <span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						User login
+					</h4>
+				</div>
+			
+				<!-- Modal Body -->
+				<div class="modal-body">
+				
+					<form role="form">
+					  <div class="form-group">
+						<label for="exampleInputEmail1">User name</label>
+						  <input type="email" class="form-control"
+						  id="usernameInput" placeholder="User name"/>
+					  </div>
+					  <div class="form-group">
+						<label for="exampleInputPassword1">Password</label>
+						  <input type="password" class="form-control"
+							  id="exampleInputPassword1" placeholder="Password"/>
+					  </div>
+					  
+					</form>
+				
+				
+				</div>
+			
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default"
+							data-dismiss="modal">
+								Cancel
+					</button>
+					<button id="loginBtn" type="button" class="btn btn-primary">
+						Submit
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
   </body>
 </html>

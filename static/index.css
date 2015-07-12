@@ -1,0 +1,92 @@
+body {
+	padding-top: 50px;
+	overflow: hidden;
+}
+#wrapper {
+	min-height: 100%;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	display: inline-block;
+}
+#main-wrapper {
+	height: 100%;
+	overflow-y: auto;
+	padding: 50px 0 0px 0;
+}
+#main {
+	position: relative;
+	height: 100%;
+	overflow-y: auto;
+	padding: 0 15px;
+}
+#sidebar-wrapper {
+	height: 100%;
+	padding: 50px 0 0px 0;
+	position: fixed;
+	border-right: 1px solid gray;
+}
+#sidebar {
+	position: relative;
+	height: 100%;
+	overflow-y: auto;
+}
+#sidebar .list-group-item {
+		border-radius: 0;
+		border-left: 0;
+		border-right: 0;
+		border-top: 0;
+}
+@media (max-width: 992px) {
+	body {
+		padding-top: 0px;
+	}
+}
+@media (min-width: 992px) {
+	#main-wrapper {
+		float:right;
+	}
+}
+@media (max-width: 992px) {
+	#main-wrapper {
+		padding-top: 0px;
+	}
+}
+@media (max-width: 992px) {
+	#sidebar-wrapper {
+		position: static;
+		height:auto;
+		max-height: 300px;
+		border-right:0;
+	}
+}
+
+.nav-tabs > li {
+	position:relative;    
+}
+
+.nav-tabs > li > a {
+	display:inline-block;
+}
+
+.nav-tabs > li > span {
+	display:none;
+	cursor:pointer;
+	position:absolute;
+	right: 6px;
+	top: 8px;
+	color: red;
+}
+
+.nav-tabs > li:hover > span {
+	display: inline-block;
+}
+
+.tab-pane { background: #FAFAFA; padding: 3px; position: fixed; bottom: 0; width: 90%; }
+.tab-pane > input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+.tab-pane > button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+.tab-pane > ul { list-style-type: none; margin: 0; padding: 0; }
+.tab-pane > ul > li { padding: 5px 10px; }
+.tab-pane > ul > li:nth-child(odd) { background: #eee; }
